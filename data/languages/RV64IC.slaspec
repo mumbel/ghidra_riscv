@@ -1,0 +1,10 @@
+# RV64IC
+
+define endian=little;
+
+@define RISCV64I ""
+@define RISCVC ""
+
+@include "riscv.reg.sinc"
+@include "riscv.table.sinc"
+@include "riscv.instr.sinc"

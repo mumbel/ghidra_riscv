@@ -1,0 +1,13 @@
+# RV64IMAFD
+
+define endian=little;
+
+@define RISCV64I ""
+@define RISCVM ""
+@define RISCVA ""
+@define RISCVF ""
+@define RISCVD ""
+
+@include "riscv.reg.sinc"
+@include "riscv.table.sinc"
+@include "riscv.instr.sinc"

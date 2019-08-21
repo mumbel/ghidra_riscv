@@ -1,0 +1,14 @@
+# RV32IMAFDC
+
+define endian=little;
+
+@define RISCV32I ""
+@define RISCVM ""
+@define RISCVA ""
+@define RISCVF ""
+@define RISCVD ""
+@define RISCVC ""
+
+@include "riscv.reg.sinc"
+@include "riscv.table.sinc"
+@include "riscv.instr.sinc"
