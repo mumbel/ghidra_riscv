@@ -265,7 +265,7 @@
 }
 @endif
 
-@if defined(RISCV64I) || defined(RISCV128I)
+@if ADDRSIZE == "64" || ADDRSIZE == "128"
 # c.sdsp CV,CN(Cc) 0000e002 0000e003 QWORD|DREF (64, 8) 
 :c.sdsp crs2,csdspimm(sp) is RVC & crs2 & sp & cop0001=0x2 & cop1315=0x7 & csdspimm
 {
