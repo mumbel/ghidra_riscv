@@ -1,12 +1,11 @@
-# RV32IMAFD
-
 define endian=little;
 
-@define RISCV32I ""
-@define RISCVM ""
-@define RISCVA ""
-@define RISCVF ""
-@define RISCVD ""
+@define XLEN 8
+@define XLEN2 16
+@define FLEN 8
+
+@define ADDRSIZE "64"
+@define FPSIZE "64"
 
 @include "riscv.reg.sinc"
 @include "riscv.table.sinc"

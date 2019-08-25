@@ -1,8 +1,11 @@
-# RV64I
-
 define endian=little;
 
-@define RISCV64I ""
+@define XLEN 4
+@define XLEN2 8
+@define FLEN 4
+
+@define ADDRSIZE "32"
+@define FPSIZE "32"
 
 @include "riscv.reg.sinc"
 @include "riscv.table.sinc"

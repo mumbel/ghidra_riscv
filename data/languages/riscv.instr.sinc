@@ -7,13 +7,14 @@
 @include "riscv.rv32m.sinc"
 @include "riscv.rv32q.sinc"
 
+@if ADDRSIZE == "64"
 @include "riscv.rv64i.sinc"
 @include "riscv.rv64a.sinc"
 @include "riscv.rv64d.sinc"
 @include "riscv.rv64f.sinc"
-
 @include "riscv.rv64m.sinc"
 @include "riscv.rv64q.sinc"
+@endif
 
 @include "riscv.csr.sinc"
 @include "riscv.priv.sinc"

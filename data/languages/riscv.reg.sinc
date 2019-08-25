@@ -1,43 +1,48 @@
 
-
-@if defined(RISCV128I)
-@define XLEN 16
-@define XLEN2 32
-@elif defined(RISCV64I)
-@define XLEN 8
-@define XLEN2 16
-@elif defined(RISCV32I)
-@define XLEN 4
-@define XLEN2 8
-@else
-@define XLEN 8
-@define XLEN2 16
-@endif
-
-#TODO  these names are madeup. do real ones exist?
-@define HFLEN 2
-@define SFLEN 4
-@define DFLEN 8
-@define QFLEN 16
-
-# There can be no float-pointer
-@if defined(RISCVQ)
-@define FLEN 16
-@elif defined(RISCVD)
-@define FLEN 8
-@elif defined(RISCVF)
-@define FLEN 4
-@else
-@define FLEN "NO-FP"
-@endif
-
-
-
-
 define alignment=2;
 
 define space ram type=ram_space size=$(XLEN) default;
 define space register type=register_space size=4;
+
+
+# A - Atomic instructions
+# B - Bit manipulation instructions
+# C - Compressed instructions
+# D - Double-precision floating-point instructions
+# E - Embedded applications, resource-constrained subset
+# F - Single-precision floating-point instructions
+# G - General (I + M + A + F + D)
+# I - Integer base instructions
+# J - Dynamically translated languages
+# L - Decimal floating point instructions
+# M - Integer multiplication and division instructions
+# N - User-level interrupt instructions
+# P - Packed-SIMD instructions
+# Q - Quad-precision floating-point instructions
+# T - Transactional Memory instructions
+# V - Vector operations instructions
+# RV [32, 64, 128] I, M, A, F, D, G, Q, L, C, B, J, T, P, V, N
+define register offset=0x1020 size=8 extensions;
+define context extensions
+  RVI=(0,0)
+  RVM=(1,1)
+  RVA=(2,2)
+  RVF=(3,3)
+  RVD=(4,4)
+  RVG=(0,4)
+  RVQ=(5,5)
+  RVL=(6,6)
+  RVC=(7,7)
+  RVB=(8,8)
+  RVJ=(9,9)
+  RVT=(10,10)
+  RVP=(11,11)
+  RVV=(12,12)
+  RVN=(13,13)
+  RV128=(61,61)
+  RV64=(62,62)
+  RV32=(63,63)
+;
 
 define register offset=0x1000 size=$(XLEN) [ pc ];
 
@@ -77,8 +82,7 @@ define register offset=0x2000 size=$(XLEN) [ zero ra sp  gp  tp t0 t1 t2
        			    	      	     s0   s1 a0  a1  a2 a3 a4 a5
 				       	     a6   a7 s2  s3  s4 s5 s6 s7
 				       	     s8   s9 s10 s11 t3 t4 t5 t6 ];
-
-@if defined(RISCVF) || defined(RISCVD)
+@if FPSIZE != ""
 define register offset=0x3000 size=$(FLEN) [ ft0 ft1 ft2  ft3  ft4 ft5 ft6  ft7
        			      	       	     fs0 fs1 fa0  fa1  fa2 fa3 fa4  fa5
 				       	     fa6 fa7 fs2  fs3  fs4 fs5 fs6  fs7
@@ -172,7 +176,6 @@ define token instr (32)
   sop3131=(31,31) signed
 ;
 
-@if defined(RISCVC)
 define token cinstr (16)
   cop0001=(0,1)
   cop0202=(2,2)
@@ -216,40 +219,33 @@ define token cinstr (16)
   scop1212=(12,12) signed
   cop1315=(13,15)
 ;
-@endif
 
 
 attach variables [ r0711 r1519 r2024 r2731 ]
        		 [ zero ra sp gp tp t0 t1 t2 s0 s1 a0  a1  a2 a3 a4 a5
 		   a6   a7 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 t3 t4 t5 t6 ];
 
-@if defined(RISCVC)
 attach variables [ cr0206 cr0711 cd0711 ]
        		 [ zero ra sp gp tp t0 t1 t2 s0 s1 a0  a1  a2 a3 a4 a5
 		   a6   a7 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 t3 t4 t5 t6 ];
-@endif
 
-@if defined(RISCVF) || defined(RISCVD)
+attach variables [ cr0204s cr0709s cd0709s ]
+       		 [ s0 s1 a0 a1 a2 a3 a4 a5 ];
+
+
+@if FPSIZE != ""
 attach variables [ fr0711 fr1519 fr2024 fr2731 ]
        		 [ ft0 ft1 ft2 ft3 ft4 ft5 ft6 ft7 fs0 fs1 fa0  fa1  fa2 fa3 fa4  fa5
 		   fa6 fa7 fs2 fs3 fs4 fs5 fs6 fs7 fs8 fs9 fs10 fs11 ft8 ft9 ft10 ft11 ];
 
-@if defined(RISCVC)
 attach variables [ cfr0206 cfr0711 ]
        		 [ ft0 ft1 ft2 ft3 ft4 ft5 ft6 ft7 fs0 fs1 fa0  fa1  fa2 fa3 fa4  fa5
 		   fa6 fa7 fs2 fs3 fs4 fs5 fs6 fs7 fs8 fs9 fs10 fs11 ft8 ft9 ft10 ft11 ];
-@endif
-@endif
 
-@if defined(RISCVC)
-attach variables [ cr0204s cr0709s cd0709s ]
-       		 [ s0 s1 a0 a1 a2 a3 a4 a5 ];
-
-@if defined(RISCVF) || defined(RISCVD)
 attach variables [ cfr0204s cfr0709s ]
        		 [ fs0 fs1 fa0 fa1 fa2 fa3 fa4 fa5 ];
 @endif
-@endif
+
 
 #TODO  this approach is probably incorrect
 define register offset=0x90000000 size=$(XLEN) [ ustatus ];

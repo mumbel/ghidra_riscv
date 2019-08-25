@@ -1,4 +1,17 @@
 
+#TODO  these names are madeup. do real ones exist?
+#TODO  go through and use these instead of numbers
+@define HFLEN 2
+@define SFLEN 4
+@define DFLEN 8
+@define QFLEN 16
+
+@define HXLEN 2
+@define WXLEN 4
+@define DXLEN 8
+@define QXLEN 16
+
+
 define pcodeop trap;
 
 
@@ -12,17 +25,17 @@ rs2: zero is r2024 & zero & op2024=0 { export 0:$(XLEN); }
 rd: r0711 is r0711 & op0711!=0 { export r0711; }
 rd: zero is r0711 & zero & op0711=0 { export 0:$(XLEN); }
 
-@if defined(RISCV32I)
+@if ADDRSIZE == "32"
 
-rs1W: r1519 is r1519 & op1519!=0 { export r1519; } 
-rs1W: zero is r1519 & zero & op1519=0 { export 0:$(XLEN); }
+rs1W: r1519 is RV32 & r1519 & op1519!=0 { export r1519; }
+rs1W: zero is RV32 & r1519 & zero & op1519=0 { export 0:$(XLEN); }
 
-rs2W: r2024 is r2024 & op2024!=0 { export r2024; }
-rs2W: zero is r2024 & zero & op2024=0 { export 0:$(XLEN); }
+rs2W: r2024 is RV32 & r2024 & op2024!=0 { export r2024; }
+rs2W: zero is RV32 & r2024 & zero & op2024=0 { export 0:$(XLEN); }
 
 #TODO  dest may be bad, might need an assign macro
-rdW: r0711 is r0711 & op0711!=0 { export r0711; }
-rdW: zero is r0711 & zero & op0711=0 { export 0:$(XLEN); }
+rdW: r0711 is RV32 & r0711 & op0711!=0 { export r0711; }
+rdW: zero is RV32 & r0711 & zero & op0711=0 { export 0:$(XLEN); }
 
 @else
 
@@ -38,7 +51,8 @@ rdW: zero is r0711 & zero & op0711=0 { export 0:8; }
 
 @endif
 
-@if defined(RISCV64I)
+#TODO  does this need to be in an if/endif
+@if ADDRSIZE == "64"
 rs1L: r1519 is r1519 & op1519!=0 { local tmp:8 = r1519:8; export tmp; } 
 rs1L: zero is r1519 & zero & op1519=0 { export 0:8; }
 
@@ -65,7 +79,7 @@ rdL: zero is r0711 & zero & op0711=0 { export 0:8; }
 # # 128-bit quad-precision  $(QFLEN)
 # fmt: ".q" is op2526=3 { export $(QFLEN):1; }
 
-@if defined(RISCVF) || defined(RISCVD)
+@if FPSIZE != ""
 
 frd:  fr0711 is fr0711 { export fr0711; }
 frs1: fr1519 is fr1519 { export fr1519; }
@@ -78,26 +92,26 @@ frs1S: fr1519 is fr1519 { local tmp = fr1519:$(SFLEN); export tmp; }
 frs2S: fr2024 is fr2024 { local tmp = fr2024:$(SFLEN); export tmp; }
 frs3S: fr2731 is fr2731 { local tmp = fr2731:$(SFLEN); export tmp; }
 
-@if defined(RISCVD)
+
 #TODO  dest may be bad, might need an assign macro
 #frdD:  fr0711 is fr0711 { local tmp = fr0711:$(DFLEN); export tmp; }
 frs1D: fr1519 is fr1519 { local tmp = fr1519:$(DFLEN); export tmp; }
 frs2D: fr2024 is fr2024 { local tmp = fr2024:$(DFLEN); export tmp; }
 frs3D: fr2731 is fr2731 { local tmp = fr2731:$(DFLEN); export tmp; }
-@endif
+
 
 macro fassignS(dest, src) {
-@if defined(RISCVD)
-	dest = zext(src);
-@else
+@if FPSIZE == "32"
 	dest = src;
+@else
+	dest = zext(src);
 @endif
 }
 
 @endif
 
 macro assignW(dest, src) {
-@if defined(RISCV32I)
+@if ADDRSIZE == "32"
 	dest = src;
 @else
 	dest = sext(src);
@@ -105,7 +119,7 @@ macro assignW(dest, src) {
 }
 
 macro zassignW(dest, src) {
-@if defined(RISCV32I)
+@if ADDRSIZE == "32"
 	dest = src;
 @else
 	dest = zext(src);
@@ -113,7 +127,7 @@ macro zassignW(dest, src) {
 }
 
 macro zassignD(dest, src) {
-@if defined(RISCV64I)
+@if ADDRSIZE == "64"
 	dest = src;
 @else
 	dest = zext(src);
@@ -137,7 +151,7 @@ immU: sop1231 is sop1231 { local tmp:$(XLEN) = sop1231; export tmp; }
 # used for goto
 immUJ: reloc is op1219 & op2020 & op2130 & sop3131 [ reloc = inst_start + ((sop3131 << 20) | (op2130 << 1) | (op2020 << 11) | (op1219 << 12)); ] { export *[ram]:$(XLEN) reloc; }
 
-@if defined(RISCV64I)
+@if ADDRSIZE == "64"
 shamt5: op2024 is op2024 { local tmp:$(XLEN) = op2024; export tmp; }
 @endif
 
@@ -159,8 +173,6 @@ aqrl: ".aqrl" is op2526=3 {}
 
 
 
-@if defined(RISCVC)
-
 crs1: cr0711 is cr0711 & cop0711!=0 { export cr0711; }
 crs1: zero is cr0711 & zero & cop0711=0 { export 0:$(XLEN); }
 
@@ -170,7 +182,7 @@ crd: zero is cd0711 & zero & cop0711=0 { export 0:$(XLEN); }
 crs2: cr0206 is cr0206 & cop0206!=0 { export cr0206; }
 crs2: zero is cr0206 & zero & cop0206=0 { export 0:$(XLEN); }
 
-@if defined(RISCVF) || defined(RISCVD)
+@if FPSIZE != ""
 cfrs1: cfr0711 is cfr0711 { export cfr0711; }
 
 cfrd: cfr0711 is cfr0711 { export cfr0711; }
@@ -192,13 +204,13 @@ cbimm: reloc is scop1212 & cop1011 & cop0506 & cop0304 & cop0202 [ reloc = inst_
 # used for goto
 cjimm: reloc is scop1212 & cop1111 & cop0910 & cop0808 & cop0707 & cop0606 & cop0305 & cop0202 [ reloc = inst_start + ((scop1212 << 11) | (cop1111 << 4) | (cop0910 << 8) | (cop0808 << 10) | (cop0707 << 6) | (cop0606 << 7) | (cop0305 << 1) | (cop0202 << 5)); ] { export *[ram]:$(XLEN) reloc; }
 
-@if defined(RISCV32I)
+@if ADDRSIZE == "32"
 #TODO  nonzero, would like to have cop0205>0
 c6imm: uimm is cop1212=0 & cop0206 [ uimm = (cop0206 + 0); ] { local tmp:$(XLEN) = uimm; export tmp; }
-@elif defined(RISCV64I)
+@elif ADDRSIZE == "64"
 #TODO  nonzero, would like to have cop0205>0 | cop0206>0
 c6imm: uimm is cop1212 & cop0206 [ uimm = (cop1212 << 5) | (cop0206); ] { local tmp:$(XLEN) = uimm; export tmp; }
-@elif defined(RISCV128I)
+@elif ADDRSIZE == "128"
 c6imm: uimm is cop1212 & cop0206 [ uimm = (cop1212 << 5) | (cop0206); ] { local tmp:$(XLEN) = uimm + (64 * (uimm == 0)); export tmp; }
 @endif
 
@@ -219,7 +231,7 @@ clqimm: uimm is cop1112 & cop1010 & cop0506 [ uimm = (cop1112 << 4) | (cop1010 <
 
 cldspimm: uimm is cop1212 & cop0506 & cop0204 [ uimm = (cop1212 << 5) | (cop0506 << 3) | (cop0204 << 6); ] { local tmp:$(XLEN) = uimm; export tmp; }
 
-@if defined(RISCV128I)
+@if ADDRSIZE == "64"
 clqspimm: uimm is cop1212 & cop0606 & cop0205 [ uimm = (cop1212 << 5) | (cop0606 << 4) | (cop0205 << 6); ] { local tmp:$(XLEN) = uimm; export tmp; }
 @endif
 
@@ -227,14 +239,11 @@ clwspimm: uimm is cop1212 & cop0406 & cop0203 [ uimm = (cop1212 << 5) | (cop0406
 
 csdspimm: uimm is cop0709 & cop1012 [ uimm = (cop0709 << 6) | (cop1012 << 3); ] { local tmp:$(XLEN) = uimm; export tmp; }
 
-@if defined(RISCV128I)
+@if ADDRSIZE == "128"
 csqspimm: uimm is cop0710 & cop1112 [ uimm = (cop0710 << 6) | (cop1112 << 4); ] { local tmp:$(XLEN) = uimm; export tmp; }
 @endif
 
 cswspimm: uimm is cop0708 & cop0912 [ uimm = (cop0708 << 6) | (cop0912 << 2); ] { local tmp:$(XLEN) = uimm; export tmp; }
-
-# RISCVC
-@endif
 
 
 
