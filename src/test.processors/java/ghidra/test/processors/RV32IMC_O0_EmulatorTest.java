@@ -19,7 +19,7 @@ import ghidra.test.processors.support.ProcessorEmulatorTestAdapter;
 import junit.framework.Test;
 
 public class RV32IMC_O0_EmulatorTest extends ProcessorEmulatorTestAdapter {
-	private static final String LANGUAGE_ID = "RISCV:LE:32:RV32IC"; //TODO  RV32IMC
+	private static final String LANGUAGE_ID = "RISCV:LE:32:RV32IMC";
 	private static final String COMPILER_SPEC_ID = "gcc";
 
 	private static final String[] REG_DUMP_SET = new String[] {};
