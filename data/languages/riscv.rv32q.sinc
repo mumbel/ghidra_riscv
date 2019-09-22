@@ -158,13 +158,13 @@
 
 
 # fmadd.q D,S,T,R 06007043 0600707f SIMPLE (0, 0) 
-:fmadd.q frd,frs1,frs2,frs3 is RV32 & RVQ & frs1 & frd & frs2 & frs3 & op0001=0x3 & op0204=0x0 & op0506=0x2 & funct3=0x7 & funct7=0x3
+:fmadd.q frd,frs1,frs2,frs3 is RV32 & RVQ & frs1 & frd & frs2 & frs3 & op0001=0x3 & op0204=0x0 & op0506=0x2 & funct3=0x7 & op2526=0x3
 {
 	frd = (frs1 f* frs2) f+ frs3;
 }
 
 # fmadd.q D,S,T,R,m 06000043 0600007f SIMPLE (0, 0) 
-:fmadd.q frd,frs1,frs2,frs3,FRM is RV32 & RVQ & frs1 & frd & frs2 & FRM & op1214!=7 & frs3 & op0001=0x3 & op0204=0x0 & op0506=0x2 & funct7=0x3
+:fmadd.q frd,frs1,frs2,frs3,FRM is RV32 & RVQ & frs1 & frd & frs2 & FRM & op1214!=7 & frs3 & op0001=0x3 & op0204=0x0 & op0506=0x2 & op2526=0x3
 {
 	frd = (frs1 f* frs2) f+ frs3;
 }
@@ -198,13 +198,13 @@
 }
 
 # fmsub.q D,S,T,R 06007047 0600707f SIMPLE (0, 0) 
-:fmsub.q frd,frs1,frs2,frs3 is RV32 & RVQ & frs1 & frd & frs2 & frs3 & op0001=0x3 & op0204=0x1 & op0506=0x2 & funct3=0x7 & funct7=0x3
+:fmsub.q frd,frs1,frs2,frs3 is RV32 & RVQ & frs1 & frd & frs2 & frs3 & op0001=0x3 & op0204=0x1 & op0506=0x2 & funct3=0x7 & op2526=0x3
 {
 	frd = (frs1 f* frs2) f- frs3;
 }
 
 # fmsub.q D,S,T,R,m 06000047 0600007f SIMPLE (0, 0) 
-:fmsub.q frd,frs1,frs2,frs3,FRM is RV32 & RVQ & frs1 & frd & frs2 & FRM & op1214!=7 & frs3 & op0001=0x3 & op0204=0x1 & op0506=0x2 & funct7=0x3
+:fmsub.q frd,frs1,frs2,frs3,FRM is RV32 & RVQ & frs1 & frd & frs2 & FRM & op1214!=7 & frs3 & op0001=0x3 & op0204=0x1 & op0506=0x2 & op2526=0x3
 {
 	frd = (frs1 f* frs2) f- frs3;
 }
@@ -237,25 +237,25 @@
 
 
 # fnmadd.q D,S,T,R 0600704f 0600707f SIMPLE (0, 0) 
-:fnmadd.q frd,frs1,frs2,frs3 is RV32 & RVQ & frs1 & frd & frs2 & frs3 & op0001=0x3 & op0204=0x3 & op0506=0x2 & funct3=0x7 & funct7=0x3
+:fnmadd.q frd,frs1,frs2,frs3 is RV32 & RVQ & frs1 & frd & frs2 & frs3 & op0001=0x3 & op0204=0x3 & op0506=0x2 & funct3=0x7 & op2526=0x3
 {
 	frd = (f- (frs1 f* frs2)) f- frs3;
 }
 
 # fnmadd.q D,S,T,R,m 0600004f 0600007f SIMPLE (0, 0) 
-:fnmadd.q frd,frs1,frs2,frs3,FRM is RV32 & RVQ & frs1 & frd & frs2 & FRM & op1214!=7 & frs3 & op0001=0x3 & op0204=0x3 & op0506=0x2 & funct7=0x3
+:fnmadd.q frd,frs1,frs2,frs3,FRM is RV32 & RVQ & frs1 & frd & frs2 & FRM & op1214!=7 & frs3 & op0001=0x3 & op0204=0x3 & op0506=0x2 & op2526=0x3
 {
 	frd = (f- (frs1 f* frs2)) f- frs3;
 }
 
 # fnmsub.q D,S,T,R 0600704b 0600707f SIMPLE (0, 0) 
-:fnmsub.q frd,frs1,frs2,frs3 is RV32 & RVQ & frs1 & frd & frs2 & frs3 & op0001=0x3 & op0204=0x2 & op0506=0x2 & funct3=0x7 & funct7=0x3
+:fnmsub.q frd,frs1,frs2,frs3 is RV32 & RVQ & frs1 & frd & frs2 & frs3 & op0001=0x3 & op0204=0x2 & op0506=0x2 & funct3=0x7 & op2526=0x3
 {
 	frd = (f- (frs1 f* frs2)) f+ frs3;
 }
 
 # fnmsub.q D,S,T,R,m 0600004b 0600007f SIMPLE (0, 0) 
-:fnmsub.q frd,frs1,frs2,frs3,FRM is RV32 & RVQ & frs1 & frd & frs2 & FRM & op1214!=7 & frs3 & op0001=0x3 & op0204=0x2 & op0506=0x2 & funct7=0x3
+:fnmsub.q frd,frs1,frs2,frs3,FRM is RV32 & RVQ & frs1 & frd & frs2 & FRM & op1214!=7 & frs3 & op0001=0x3 & op0204=0x2 & op0506=0x2 & op2526=0x3
 {
 	frd = (f- (frs1 f* frs2)) f+ frs3;
 }

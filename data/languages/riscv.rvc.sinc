@@ -87,7 +87,7 @@
 }
 @endif
 
-@if (ADDRSIZE == "64" || ADDRSIZE == "128") && FPSIZE == "64"
+@if (ADDRSIZE == "32" || ADDRSIZE == "64") && FPSIZE == "64"
 # c.fldsp D,Cn(Cc) 00002002 0000e003 QWORD|DREF (0, 8) 
 :c.fldsp cfrd,cldspimm(sp) is RVC & RVD & cfrd & sp & cop0001=0x2 & cop1315=0x1 & cldspimm
 {

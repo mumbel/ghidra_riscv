@@ -146,7 +146,7 @@
 
 
 # fmadd.s D,S,T,R 00007043 0600707f SIMPLE (0, 0) 
-:fmadd.s frd,frs1S,frs2S,frs3S is RV32 & RVF & frs1S & frd & frs2S & frs3S & op0001=0x3 & op0204=0x0 & op0506=0x2 & funct3=0x7 & funct7=0x0
+:fmadd.s frd,frs1S,frs2S,frs3S is RV32 & RVF & frs1S & frd & frs2S & frs3S & op0001=0x3 & op0204=0x0 & op0506=0x2 & funct3=0x7 & op2526=0x0
 {
 	local tmp:4 = (frs1S f* frs2S) f+ frs3S;
 	fassignS(frd, tmp);
@@ -154,7 +154,7 @@
 
 
 # fmadd.s D,S,T,R,m 00000043 0600007f SIMPLE (0, 0) 
-:fmadd.s frd,frs1S,frs2S,frs3S,FRM is RV32 & RVF & frs1S & frd & frs2S & FRM & op1214!=7 & frs3S & op0001=0x3 & op0204=0x0 & op0506=0x2 & funct7=0x0
+:fmadd.s frd,frs1S,frs2S,frs3S,FRM is RV32 & RVF & frs1S & frd & frs2S & FRM & op1214!=7 & frs3S & op0001=0x3 & op0204=0x0 & op0506=0x2 & op2526=0x0
 {
 	local tmp:4 = (frs1S f* frs2S) f+ frs3S;
 	fassignS(frd, tmp);
@@ -194,7 +194,7 @@
 
 
 # fmsub.s D,S,T,R 00007047 0600707f SIMPLE (0, 0) 
-:fmsub.s frd,frs1S,frs2S,frs3S is RV32 & RVF & frs1S & frd & frs2S & frs3S & op0001=0x3 & op0204=0x1 & op0506=0x2 & funct3=0x7 & funct7=0x0
+:fmsub.s frd,frs1S,frs2S,frs3S is RV32 & RVF & frs1S & frd & frs2S & frs3S & op0001=0x3 & op0204=0x1 & op0506=0x2 & funct3=0x7 & op2526=0x0
 {
 	local tmp:4 = (frs1S f* frs2S) f- frs3S;
 	fassignS(frd, tmp);
@@ -202,7 +202,7 @@
 
 
 # fmsub.s D,S,T,R,m 00000047 0600007f SIMPLE (0, 0) 
-:fmsub.s frd,frs1S,frs2S,frs3S,FRM is RV32 & RVF & frs1S & frd & frs2S & FRM & op1214!=7 & frs3S & op0001=0x3 & op0204=0x1 & op0506=0x2 & funct7=0x0
+:fmsub.s frd,frs1S,frs2S,frs3S,FRM is RV32 & RVF & frs1S & frd & frs2S & FRM & op1214!=7 & frs3S & op0001=0x3 & op0204=0x1 & op0506=0x2 & op2526=0x0
 {
 	local tmp:4 = (frs1S f* frs2S) f- frs3S;
 	fassignS(frd, tmp);
@@ -238,7 +238,7 @@
 
 
 # fnmadd.s D,S,T,R 0000704f 0600707f SIMPLE (0, 0) 
-:fnmadd.s frd,frs1S,frs2S,frs3S is RV32 & RVF & frs1S & frd & frs2S & frs3S & op0001=0x3 & op0204=0x3 & op0506=0x2 & funct3=0x7 & funct7=0x0
+:fnmadd.s frd,frs1S,frs2S,frs3S is RV32 & RVF & frs1S & frd & frs2S & frs3S & op0001=0x3 & op0204=0x3 & op0506=0x2 & funct3=0x7 & op2526=0x0
 {
 	local tmp:4 = (f- (frs1S f* frs2S)) f- frs3S;
 	fassignS(frd, tmp);
@@ -246,7 +246,7 @@
 
 
 # fnmadd.s D,S,T,R,m 0000004f 0600007f SIMPLE (0, 0) 
-:fnmadd.s frd,frs1S,frs2S,frs3S,FRM is RV32 & RVF & frs1S & frd & frs2S & FRM & op1214!=7 & frs3S & op0001=0x3 & op0204=0x3 & op0506=0x2 & funct7=0x0
+:fnmadd.s frd,frs1S,frs2S,frs3S,FRM is RV32 & RVF & frs1S & frd & frs2S & FRM & op1214!=7 & frs3S & op0001=0x3 & op0204=0x3 & op0506=0x2 & op2526=0x0
 {
 	local tmp:4 = (f- (frs1S f* frs2S)) f- frs3S;
 	fassignS(frd, tmp);
@@ -254,7 +254,7 @@
 
 
 # fnmsub.s D,S,T,R 0000704b 0600707f SIMPLE (0, 0) 
-:fnmsub.s frd,frs1S,frs2S,frs3S is RV32 & RVF & frs1S & frd & frs2S & frs3S & op0001=0x3 & op0204=0x2 & op0506=0x2 & funct3=0x7 & funct7=0x0
+:fnmsub.s frd,frs1S,frs2S,frs3S is RV32 & RVF & frs1S & frd & frs2S & frs3S & op0001=0x3 & op0204=0x2 & op0506=0x2 & funct3=0x7 & op2526=0x0
 {
 	local tmp:4 = (f- (frs1S f* frs2S)) f+ frs3S;
 	fassignS(frd, tmp);
@@ -262,7 +262,7 @@
 
 
 # fnmsub.s D,S,T,R,m 0000004b 0600007f SIMPLE (0, 0) 
-:fnmsub.s frd,frs1S,frs2S,frs3S,FRM is RV32 & RVF & frs1S & frd & frs2S & FRM & op1214!=7 & frs3S & op0001=0x3 & op0204=0x2 & op0506=0x2 & funct7=0x0
+:fnmsub.s frd,frs1S,frs2S,frs3S,FRM is RV32 & RVF & frs1S & frd & frs2S & FRM & op1214!=7 & frs3S & op0001=0x3 & op0204=0x2 & op0506=0x2 & op2526=0x0
 {
 	local tmp:4 = (f- (frs1S f* frs2S)) f+ frs3S;
 	fassignS(frd, tmp);
