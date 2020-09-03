@@ -17,10 +17,13 @@ define pcodeop trap;
 
 # possible tokens:  r0711 r1519 r2024 r2731 cr0206 cr0711 cd0711
 rs1: r1519 is r1519 & op1519!=0 { export r1519; } 
-rs1: zero is r1519 & zero & op1519=0 { export 0:$(XLEN); }
+rs1: zero is zero & op1519=0 { export 0:$(XLEN); }
 
 rs2: r2024 is r2024 & op2024!=0 { export r2024; }
-rs2: zero is r2024 & zero & op2024=0 { export 0:$(XLEN); }
+rs2: zero is zero & op2024=0 { export 0:$(XLEN); }
+
+rs3: r2731 is r2731 & op2731!=0 { export r2731; }
+rs3: zero is zero & op2731=0 { export 0:$(XLEN); }
 
 rd: r0711 is r0711 & op0711!=0 { export r0711; }
 rd: zero is r0711 & zero & op0711=0 { export 0:$(XLEN); }
@@ -339,3 +342,30 @@ with csr: op3031=3 & op2829=3 {
 	: csr_F8 is csr_F8 & op2627=2 { export csr_F8; } # machine, standard read-only
 	: csr_FC is csr_FC & op2627=3 { export csr_FC; } # machine, custom read-only
 }
+
+
+
+vm: op2525 is op2525 { local tmp:1 = op2525; export tmp; }
+
+vs1: v1519 is v1519 { export v1519; } 
+vs2: v2024 is v2024 { export v2024; }
+vs3: v0711 is v0711 { export v0711; }
+vd:  v0711 is v0711 { export v0711; }
+
+simm5: sop1519 is sop1519 { local tmp:$(XLEN) = sop1519; export tmp; }
+# zimm: op1519 is op1519 { local tmp:$(XLEN) = op1519; export tmp; }
+
+nf: op2931 is op2931 { local tmp:$(XLEN) = op2931; export tmp; }
+
+vtypei: op2030 is op2030 { local tmp:$(XLEN) = op2030; export tmp; }
+
+
+bs: op3031 is op3031 { local tmp:$(XLEN) = op3031; export tmp; }
+rcon: op2023 is op2023 { local tmp:$(XLEN) = op2023; export tmp; }
+
+# imm=0 for baseline operation, nonzero values are reserved
+shamtw: 0 is op2024=0 { local tmp:$(XLEN) = 0; export tmp; }
+
+imm3u: op2022 is op2022 { local tmp:$(XLEN) = op2022; export tmp; }
+imm4u: op2023 is op2023 { local tmp:$(XLEN) = op2023; export tmp; }
+imm5u: op2024 is op2024 { local tmp:$(XLEN) = op2024; export tmp; }

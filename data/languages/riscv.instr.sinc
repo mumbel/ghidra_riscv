@@ -4,6 +4,9 @@
 @include "riscv.rv32i.sinc"
 @include "riscv.rv32a.sinc"
 @include "riscv.rv32m.sinc"
+@include "riscv.rv32b.sinc"
+@include "riscv.rv32p.sinc"
+@include "riscv.rv32k.sinc"
 
 @if FPSIZE == "32" || FPSIZE == "64" || FPSIZE == "128"
 @include "riscv.rv32f.sinc"
@@ -22,6 +25,9 @@
 @include "riscv.rv64i.sinc"
 @include "riscv.rv64a.sinc"
 @include "riscv.rv64m.sinc"
+@include "riscv.rv64b.sinc"
+@include "riscv.rv64p.sinc"
+@include "riscv.rv64k.sinc"
 
 @if FPSIZE == "32" || FPSIZE == "64" || FPSIZE == "128"
 @include "riscv.rv64f.sinc"
@@ -39,6 +45,7 @@
 @include "riscv.csr.sinc"
 @include "riscv.priv.sinc"
 @include "riscv.rvc.sinc"
+@include "riscv.rvv.sinc"
 @include "riscv.zi.sinc"
 
 

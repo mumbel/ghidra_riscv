@@ -49,9 +49,17 @@ define register offset=0x3000 size=$(FLEN) [ ft0 ft1 ft2  ft3  ft4 ft5 ft6  ft7
 				       	     fs8 fs9 fs10 fs11 ft8 ft9 ft10 ft11 ];
 @endif
 
+#TODO  fix
+@define VLEN "256"
+define register offset=0x4000 size=$(VLEN) [ v0  v1  v2  v3  v4  v5  v6  v7
+       			      		     v8  v9  v10 v11 v12 v13 v14 v15
+					     v16 v17 v18 v19 v20 v21 v22 v23
+					     v24 v25 v26 v27 v28 v29 v30 v31 ];
+
+
 define register offset=0x90000000 size=$(XLEN) [
  ustatus fflags frm fcsr uie utvec csr006 csr007
- csr008 csr009 csr00a csr00b csr00c csr00d csr00e csr00f
+ vstart vxsat  vxrm   csr00b csr00c csr00d csr00e vcsr
  csr010 csr011 csr012 csr013 csr014 csr015 csr016 csr017
  csr018 csr019 csr01a csr01b csr01c csr01d csr01e csr01f
  csr020 csr021 csr022 csr023 csr024 csr025 csr026 csr027
@@ -438,7 +446,7 @@ define register offset=0x90000000 size=$(XLEN) [
  hpmcounter8 hpmcounter9 hpmcounter10 hpmcounter11 hpmcounter12 hpmcounter13 hpmcounter14 hpmcounter15
  hpmcounter16 hpmcounter17 hpmcounter18 hpmcounter19 hpmcounter20 hpmcounter21 hpmcounter22 hpmcounter23
  hpmcounter24 hpmcounter25 hpmcounter26 hpmcounter27 hpmcounter28 hpmcounter29 hpmcounter30 hpmcounter31
- csrc20 csrc21 csrc22 csrc23 csrc24 csrc25 csrc26 csrc27
+ vl vtype vlenb csrc23 csrc24 csrc25 csrc26 csrc27
  csrc28 csrc29 csrc2a csrc2b csrc2c csrc2d csrc2e csrc2f
  csrc30 csrc31 csrc32 csrc33 csrc34 csrc35 csrc36 csrc37
  csrc38 csrc39 csrc3a csrc3b csrc3c csrc3d csrc3e csrc3f
@@ -625,15 +633,16 @@ define context misa
 ;
 
 
-
 define token instr (32)
   op0001=(0,1)
+  op0006=(0,6)
   op0204=(2,4)
   op0506=(5,6)
   op0707=(7,7)
   op0711=(7,11)
   r0711=(7,11)
   fr0711=(7,11)
+  v0711=(7,11)
   op0811=(8,11)
   op1214=(12,14)
   funct3=(12,14)
@@ -641,15 +650,23 @@ define token instr (32)
   op1231=(12,31)
   sop1231=(12,31) signed
   op1519=(15,19)
+  sop1519=(15,19) signed
+  subf5=(15,19)
   r1519=(15,19)
   fr1519=(15,19)
+  v1519=(15,19)
   op1527=(15,27)
   op1531=(15,31)
   op2020=(20,20)
+  op2022=(20,22)
   succ=(20,23)
+  op2023=(20,23)
   op2024=(20,24)
   r2024=(20,24)
   fr2024=(20,24)
+  v2024=(20,24)
+  op2025=(20,25)
+  op2026=(20,26)
   csr_0=(20,27)
   csr_1=(20,27)
   csr_2=(20,27)
@@ -688,28 +705,38 @@ define token instr (32)
   csr_F0=(20,26)
   csr_F8=(20,25)
   csr_FC=(20,25)
+  op2030=(20,30)
   op2031=(20,31)
   sop2031=(20,31) signed
   op2130=(21,30)
+  op2324=(23,24)
+  op2424=(24,24)
   op2427=(24,27)
   pred=(24,27)
   op2525=(25,25)
   op2526=(25,26)
   op2527=(25,27)
+  op2529=(25,29)
   op2530=(25,30)
   op2531=(25,31)
   sop2531=(25,31) signed
   funct7=(25,31)
+  wd=(26,26)
+  op2626=(26,26)
   op2627=(26,27)
   op2631=(26,31)
   op2731=(27,31)
+  amoop=(27,31)
   funct5=(27,31)
   op2727=(27,27)
   r2731=(27,31)
   fr2731=(27,31)
+  op2828=(28,28)
   op2829=(28,29)
   fm=(28,31)
+  op2931=(29,31)
   op3031=(30,31)
+  op3131=(31,31)
   sop3131=(31,31) signed
 ;
 
@@ -784,11 +811,14 @@ attach variables [ cfr0204s cfr0709s ]
 @endif
 
 
+attach variables [ v0711 v1519 v2024 ]
+       		 [ v0  v1  v2  v3  v4  v5  v6  v7  v8  v9  v10 v11 v12 v13 v14 v15
+		   v16 v17 v18 v19 v20 v21 v22 v23 v24 v25 v26 v27 v28 v29 v30 v31 ];
 
 
 attach variables [ csr_0 ]
                  [ ustatus fflags frm fcsr uie utvec csr006 csr007
-                   csr008 csr009 csr00a csr00b csr00c csr00d csr00e csr00f
+                   vstart vxsat  vxrm   csr00b csr00c csr00d csr00e vcsr
                    csr010 csr011 csr012 csr013 csr014 csr015 csr016 csr017
                    csr018 csr019 csr01a csr01b csr01c csr01d csr01e csr01f
                    csr020 csr021 csr022 csr023 csr024 csr025 csr026 csr027
@@ -1201,7 +1231,7 @@ attach variables [ csr_C0 ]
                    hpmcounter8 hpmcounter9 hpmcounter10 hpmcounter11 hpmcounter12 hpmcounter13 hpmcounter14 hpmcounter15
                    hpmcounter16 hpmcounter17 hpmcounter18 hpmcounter19 hpmcounter20 hpmcounter21 hpmcounter22 hpmcounter23
                    hpmcounter24 hpmcounter25 hpmcounter26 hpmcounter27 hpmcounter28 hpmcounter29 hpmcounter30 hpmcounter31
-                   csrc20 csrc21 csrc22 csrc23 csrc24 csrc25 csrc26 csrc27
+                   vl vtype vlenb csrc23 csrc24 csrc25 csrc26 csrc27
                    csrc28 csrc29 csrc2a csrc2b csrc2c csrc2d csrc2e csrc2f
                    csrc30 csrc31 csrc32 csrc33 csrc34 csrc35 csrc36 csrc37
                    csrc38 csrc39 csrc3a csrc3b csrc3c csrc3d csrc3e csrc3f
