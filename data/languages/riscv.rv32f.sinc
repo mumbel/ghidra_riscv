@@ -231,7 +231,7 @@
 # fmv.x.w d,S e0000053 fff0707f SIMPLE (0, 0) 
 :fmv.x.w rdW,frs1S is frs1S & rdW & op0001=0x3 & op0204=0x4 & op0506=0x2 & funct3=0x0 & funct7=0x70 & op2024=0x0
 {
-	zassignW(rdW, frs1S);
+	assignW(rdW, frs1S);
 }
 
 

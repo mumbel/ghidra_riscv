@@ -190,7 +190,7 @@
 :c.ld cr0204s,cldimm(cr0709s) is cr0709s & cr0204s & cop0001=0x0 & cop1315=0x3 & cldimm
 {
 	local ea:$(XLEN) = cldimm:$(XLEN) + cr0709s;
-	zassignD(cr0204s, *[ram]:$(DXLEN) ea);
+	assignD(cr0204s, *[ram]:$(DXLEN) ea);
 }
 @endif
 
@@ -207,7 +207,7 @@
 :c.ldsp crd,cldspimm(sp) is crd & sp & cop0001=0x2 & cop1315=0x3 & cldspimm & cop0711!=0
 {
 	local ea:$(XLEN) = cldspimm + sp;
-	zassignD(crd, *[ram]:$(DXLEN) ea);
+	assignD(crd, *[ram]:$(DXLEN) ea);
 }
 @endif
 
@@ -226,23 +226,23 @@
 }
 
 # c.lui d,Cu 00006001 0000e003 SIMPLE (0, 0) 
-:c.lui crd,cbigimm is cop0711!=0 & cop0711!=2 & crd & cbigimm & cop0001=0x1 & cop1315=0x3 & cop0711!=0 & cop0711!=2 & (cop1212!=0 | cop0206!=0)
+:c.lui crd,cbigimm is cop0711!=0 & cop0711!=2 & crd & cbigimm & cop0001=0x1 & cop1315=0x3 & (cop1212!=0 | cop0206!=0)
 {
-	crd = cbigimm << 12;
+	crd = cbigimm;
 }
 
 # c.lw Ct,Ck(Cs) 00004000 0000e003 DWORD|DREF (0, 4) 
 :c.lw cr0204s,clwimm(cr0709s) is cr0709s & cr0204s & cop0001=0x0 & cop1315=0x2 & clwimm
 {
 	local ea:$(XLEN) = clwimm + cr0709s;
-	zassignW(cr0204s, *[ram]:4 ea);
+	assignW(cr0204s, *[ram]:4 ea);
 }
 
 # c.lwsp d,Cm(Cc) 00004002 0000e003 SIMPLE (0, 0) 
 :c.lwsp crd,clwspimm(sp) is crd & sp & cop0001=0x2 & cop1315=0x2 & clwspimm & cop0711!=0
 {
 	local ea:$(XLEN) = clwspimm + sp;
-	zassignW(crd, *[ram]:4 ea);
+	assignW(crd, *[ram]:4 ea);
 }
 
 # c.mv d,CV 00008002 0000f003 SIMPLE (0, 0) 
