@@ -158,12 +158,12 @@ define register offset=0x90000000 size=$(XLEN) [
  csr308 csr309 csr30a csr30b csr30c csr30d csr30e csr30f
  mstatush csr311 csr312 csr313 csr314 csr315 csr316 csr317
  csr318 csr319 csr31a csr31b csr31c csr31d csr31e csr31f
- mucounteren mscounteren mhcounteren csr323 csr324 csr325 csr326 csr327
- csr328 csr329 csr32a csr32b csr32c csr32d csr32e csr32f
- csr330 csr331 csr332 csr333 csr334 csr335 csr336 csr337
- csr338 csr339 csr33a csr33b csr33c csr33d csr33e csr33f
+ mcountinhibit csr321 csr322 mhpmevent3 mhpmevent4 mhpmevent5 mhpmevent6 mhpmevent7
+ mhpmevent8 mhpmevent9 mhpmevent10 mhpmevent11 mhpmevent12 mhpmevent13 mhpmevent14 mhpmevent15
+ mhpmevent16 mhpmevent17 mhpmevent18 mhpmevent19 mhpmevent20 mhpmevent21 mhpmevent22 mhpmevent23
+ mhpmevent24 mhpmevent25 mhpmevent26 mhpmevent27 mhpmevent28 mhpmevent29 mhpmevent30 mhpmevent31
  mscratch mepc mcause mtval mip csr345 csr346 csr347
- csr348 csr349 csr34a csr34b csr34c csr34d csr34e csr34f
+ csr348 csr349 mtinst mtval2 csr34c csr34d csr34e csr34f
  csr350 csr351 csr352 csr353 csr354 csr355 csr356 csr357
  csr358 csr359 csr35a csr35b csr35c csr35d csr35e csr35f
  csr360 csr361 csr362 csr363 csr364 csr365 csr366 csr367
@@ -174,16 +174,16 @@ define register offset=0x90000000 size=$(XLEN) [
  csr388 csr389 csr38a csr38b csr38c csr38d csr38e csr38f
  csr390 csr391 csr392 csr393 csr394 csr395 csr396 csr397
  csr398 csr399 csr39a csr39b csr39c csr39d csr39e csr39f
- pmpcfg0 pmpcfg1 pmpcfg2 pmpcfg3 csr3a4 csr3a5 csr3a6 csr3a7
- csr3a8 csr3a9 csr3aa csr3ab csr3ac csr3ad csr3ae csr3af
+ pmpcfg0 pmpcfg1 pmpcfg2 pmpcfg3 pmpcfg4 pmpcfg5 pmpcfg6 pmpcfg7
+ pmpcfg8 pmpcfg9 pmpcfg10 pmpcfg11 pmpcfg12 pmpcfg13 pmpcfg14 pmpcfg15
  pmpaddr0 pmpaddr1 pmpaddr2 pmpaddr3 pmpaddr4 pmpaddr5 pmpaddr6 pmpaddr7
  pmpaddr8 pmpaddr9 pmpaddr10 pmpaddr11 pmpaddr12 pmpaddr13 pmpaddr14 pmpaddr15
- csr3c0 csr3c1 csr3c2 csr3c3 csr3c4 csr3c5 csr3c6 csr3c7
- csr3c8 csr3c9 csr3ca csr3cb csr3cc csr3cd csr3ce csr3cf
- csr3d0 csr3d1 csr3d2 csr3d3 csr3d4 csr3d5 csr3d6 csr3d7
- csr3d8 csr3d9 csr3da csr3db csr3dc csr3dd csr3de csr3df
- csr3e0 csr3e1 csr3e2 csr3e3 csr3e4 csr3e5 csr3e6 csr3e7
- csr3e8 csr3e9 csr3ea csr3eb csr3ec csr3ed csr3ee csr3ef
+ pmpaddr16 pmpaddr17 pmpaddr18 pmpaddr19 pmpaddr20 pmpaddr21 pmpaddr22 pmpaddr23
+ pmpaddr24 pmpaddr25 pmpaddr26 pmpaddr27 pmpaddr28 pmpaddr29 pmpaddr30 pmpaddr31
+ pmpaddr32 pmpaddr33 pmpaddr34 pmpaddr35 pmpaddr36 pmpaddr37 pmpaddr38 pmpaddr39
+ pmpaddr40 pmpaddr41 pmpaddr42 pmpaddr43 pmpaddr44 pmpaddr45 pmpaddr46 pmpaddr47
+ pmpaddr48 pmpaddr49 pmpaddr50 pmpaddr51 pmpaddr52 pmpaddr53 pmpaddr54 pmpaddr55
+ pmpaddr56 pmpaddr57 pmpaddr58 pmpaddr59 pmpaddr60 pmpaddr61 pmpaddr62 pmpaddr63
  csr3f0 csr3f1 csr3f2 csr3f3 csr3f4 csr3f5 csr3f6 csr3f7
  csr3f8 csr3f9 csr3fa csr3fb csr3fc csr3fd csr3fe csr3ff
  csr400 csr401 csr402 csr403 csr404 csr405 csr406 csr407
@@ -239,7 +239,7 @@ define register offset=0x90000000 size=$(XLEN) [
  csr590 csr591 csr592 csr593 csr594 csr595 csr596 csr597
  csr598 csr599 csr59a csr59b csr59c csr59d csr59e csr59f
  csr5a0 csr5a1 csr5a2 csr5a3 csr5a4 csr5a5 csr5a6 csr5a7
- csr5a8 csr5a9 csr5aa csr5ab csr5ac csr5ad csr5ae csr5af
+ scontext csr5a9 csr5aa csr5ab csr5ac csr5ad csr5ae csr5af
  csr5b0 csr5b1 csr5b2 csr5b3 csr5b4 csr5b5 csr5b6 csr5b7
  csr5b8 csr5b9 csr5ba csr5bb csr5bc csr5bd csr5be csr5bf
  csr5c0 csr5c1 csr5c2 csr5c3 csr5c4 csr5c5 csr5c6 csr5c7
@@ -250,16 +250,16 @@ define register offset=0x90000000 size=$(XLEN) [
  csr5e8 csr5e9 csr5ea csr5eb csr5ec csr5ed csr5ee csr5ef
  csr5f0 csr5f1 csr5f2 csr5f3 csr5f4 csr5f5 csr5f6 csr5f7
  csr5f8 csr5f9 csr5fa csr5fb csr5fc csr5fd csr5fe csr5ff
- hstatus csr601 hedeleg hideleg csr604 csr605 hcounteren csr607
+ hstatus csr601 hedeleg hideleg hie htimedelta hcounteren hgeie
  csr608 csr609 csr60a csr60b csr60c csr60d csr60e csr60f
- csr610 csr611 csr612 csr613 csr614 csr615 csr616 csr617
+ csr610 csr611 csr612 csr613 csr614 htimedeltah csr616 csr617
  csr618 csr619 csr61a csr61b csr61c csr61d csr61e csr61f
  csr620 csr621 csr622 csr623 csr624 csr625 csr626 csr627
  csr628 csr629 csr62a csr62b csr62c csr62d csr62e csr62f
  csr630 csr631 csr632 csr633 csr634 csr635 csr636 csr637
  csr638 csr639 csr63a csr63b csr63c csr63d csr63e csr63f
- csr640 csr641 csr642 csr643 csr644 csr645 csr646 csr647
- csr648 csr649 csr64a csr64b csr64c csr64d csr64e csr64f
+ csr640 csr641 csr642 htval  hip    hvip   csr646 csr647
+ csr648 csr649 htinst csr64b csr64c csr64d csr64e csr64f
  csr650 csr651 csr652 csr653 csr654 csr655 csr656 csr657
  csr658 csr659 csr65a csr65b csr65c csr65d csr65e csr65f
  csr660 csr661 csr662 csr663 csr664 csr665 csr666 csr667
@@ -271,7 +271,7 @@ define register offset=0x90000000 size=$(XLEN) [
  csr690 csr691 csr692 csr693 csr694 csr695 csr696 csr697
  csr698 csr699 csr69a csr69b csr69c csr69d csr69e csr69f
  csr6a0 csr6a1 csr6a2 csr6a3 csr6a4 csr6a5 csr6a6 csr6a7
- csr6a8 csr6a9 csr6aa csr6ab csr6ac csr6ad csr6ae csr6af
+ hcontext csr6a9 csr6aa csr6ab csr6ac csr6ad csr6ae csr6af
  csr6b0 csr6b1 csr6b2 csr6b3 csr6b4 csr6b5 csr6b6 csr6b7
  csr6b8 csr6b9 csr6ba csr6bb csr6bc csr6bd csr6be csr6bf
  csr6c0 csr6c1 csr6c2 csr6c3 csr6c4 csr6c5 csr6c6 csr6c7
@@ -303,7 +303,7 @@ define register offset=0x90000000 size=$(XLEN) [
  csr790 csr791 csr792 csr793 csr794 csr795 csr796 csr797
  csr798 csr799 csr79a csr79b csr79c csr79d csr79e csr79f
  tselect tdata1 tdata2 tdata3 csr7a4 csr7a5 csr7a6 csr7a7
- csr7a8 csr7a9 csr7aa csr7ab csr7ac csr7ad csr7ae csr7af
+ mcontext csr7a9 csr7aa csr7ab csr7ac csr7ad csr7ae csr7af
  dcsr dpc dscratch0 dscratch1 csr7b4 csr7b5 csr7b6 csr7b7
  csr7b8 csr7b9 csr7ba csr7bb csr7bc csr7bd csr7be csr7bf
  csr7c0 csr7c1 csr7c2 csr7c3 csr7c4 csr7c5 csr7c6 csr7c7
@@ -414,10 +414,10 @@ define register offset=0x90000000 size=$(XLEN) [
  mhpmcounter8 mhpmcounter9 mhpmcounter10 mhpmcounter11 mhpmcounter12 mhpmcounter13 mhpmcounter14 mhpmcounter15
  mhpmcounter16 mhpmcounter17 mhpmcounter18 mhpmcounter19 mhpmcounter20 mhpmcounter21 mhpmcounter22 mhpmcounter23
  mhpmcounter24 mhpmcounter25 mhpmcounter26 mhpmcounter27 mhpmcounter28 mhpmcounter29 mhpmcounter30 mhpmcounter31
- mcountinhibit csrb21 csrb22 mhpmevent3 mhpmevent4 mhpmevent5 mhpmevent6 mhpmevent7
- mhpmevent8 mhpmevent9 mhpmevent10 mhpmevent11 mhpmevent12 mhpmevent13 mhpmevent14 mhpmevent15
- mhpmevent16 mhpmevent17 mhpmevent18 mhpmevent19 mhpmevent20 mhpmevent21 mhpmevent22 mhpmevent23
- mhpmevent24 mhpmevent25 mhpmevent26 mhpmevent27 mhpmevent28 mhpmevent29 mhpmevent30 mhpmevent31
+ csrb20 csrb21 csrb22 csrb23 csrb24 csrb25 csrb26 csrb27
+ csrb28 csrb29 csrb2a csrb2b csrb2c csrb2d csrb2e csrb2f
+ csrb30 csrb31 csrb32 csrb33 csrb34 csrb35 csrb36 csrb37
+ csrb38 csrb39 csrb3a csrb3b csrb3c csrb3d csrb3e csrb3f
  csrb40 csrb41 csrb42 csrb43 csrb44 csrb45 csrb46 csrb47
  csrb48 csrb49 csrb4a csrb4b csrb4c csrb4d csrb4e csrb4f
  csrb50 csrb51 csrb52 csrb53 csrb54 csrb55 csrb56 csrb57
@@ -508,7 +508,7 @@ define register offset=0x90000000 size=$(XLEN) [
  csrdf8 csrdf9 csrdfa csrdfb csrdfc csrdfd csrdfe csrdff
  csre00 csre01 csre02 csre03 csre04 csre05 csre06 csre07
  csre08 csre09 csre0a csre0b csre0c csre0d csre0e csre0f
- csre10 csre11 csre12 csre13 csre14 csre15 csre16 csre17
+ csre10 csre11 hgeip csre13 csre14 csre15 csre16 csre17
  csre18 csre19 csre1a csre1b csre1c csre1d csre1e csre1f
  csre20 csre21 csre22 csre23 csre24 csre25 csre26 csre27
  csre28 csre29 csre2a csre2b csre2c csre2d csre2e csre2f
@@ -920,12 +920,12 @@ attach variables [ csr_3 ]
                    csr308 csr309 csr30a csr30b csr30c csr30d csr30e csr30f
                    mstatush csr311 csr312 csr313 csr314 csr315 csr316 csr317
                    csr318 csr319 csr31a csr31b csr31c csr31d csr31e csr31f
-                   mucounteren mscounteren mhcounteren csr323 csr324 csr325 csr326 csr327
-                   csr328 csr329 csr32a csr32b csr32c csr32d csr32e csr32f
-                   csr330 csr331 csr332 csr333 csr334 csr335 csr336 csr337
-                   csr338 csr339 csr33a csr33b csr33c csr33d csr33e csr33f
+                   mcountinhibit csr321 csr322 mhpmevent3 mhpmevent4 mhpmevent5 mhpmevent6 mhpmevent7
+                   mhpmevent8 mhpmevent9 mhpmevent10 mhpmevent11 mhpmevent12 mhpmevent13 mhpmevent14 mhpmevent15
+                   mhpmevent16 mhpmevent17 mhpmevent18 mhpmevent19 mhpmevent20 mhpmevent21 mhpmevent22 mhpmevent23
+                   mhpmevent24 mhpmevent25 mhpmevent26 mhpmevent27 mhpmevent28 mhpmevent29 mhpmevent30 mhpmevent31
                    mscratch mepc mcause mtval mip csr345 csr346 csr347
-                   csr348 csr349 csr34a csr34b csr34c csr34d csr34e csr34f
+                   csr348 csr349 mtinst mtval2 csr34c csr34d csr34e csr34f
                    csr350 csr351 csr352 csr353 csr354 csr355 csr356 csr357
                    csr358 csr359 csr35a csr35b csr35c csr35d csr35e csr35f
                    csr360 csr361 csr362 csr363 csr364 csr365 csr366 csr367
@@ -936,16 +936,16 @@ attach variables [ csr_3 ]
                    csr388 csr389 csr38a csr38b csr38c csr38d csr38e csr38f
                    csr390 csr391 csr392 csr393 csr394 csr395 csr396 csr397
                    csr398 csr399 csr39a csr39b csr39c csr39d csr39e csr39f
-                   pmpcfg0 pmpcfg1 pmpcfg2 pmpcfg3 csr3a4 csr3a5 csr3a6 csr3a7
-                   csr3a8 csr3a9 csr3aa csr3ab csr3ac csr3ad csr3ae csr3af
+                   pmpcfg0 pmpcfg1 pmpcfg2 pmpcfg3 pmpcfg4 pmpcfg5 pmpcfg6 pmpcfg7
+                   pmpcfg8 pmpcfg9 pmpcfg10 pmpcfg11 pmpcfg12 pmpcfg13 pmpcfg14 pmpcfg15
                    pmpaddr0 pmpaddr1 pmpaddr2 pmpaddr3 pmpaddr4 pmpaddr5 pmpaddr6 pmpaddr7
                    pmpaddr8 pmpaddr9 pmpaddr10 pmpaddr11 pmpaddr12 pmpaddr13 pmpaddr14 pmpaddr15
-                   csr3c0 csr3c1 csr3c2 csr3c3 csr3c4 csr3c5 csr3c6 csr3c7
-                   csr3c8 csr3c9 csr3ca csr3cb csr3cc csr3cd csr3ce csr3cf
-                   csr3d0 csr3d1 csr3d2 csr3d3 csr3d4 csr3d5 csr3d6 csr3d7
-                   csr3d8 csr3d9 csr3da csr3db csr3dc csr3dd csr3de csr3df
-                   csr3e0 csr3e1 csr3e2 csr3e3 csr3e4 csr3e5 csr3e6 csr3e7
-                   csr3e8 csr3e9 csr3ea csr3eb csr3ec csr3ed csr3ee csr3ef
+                   pmpaddr16 pmpaddr17 pmpaddr18 pmpaddr19 pmpaddr20 pmpaddr21 pmpaddr22 pmpaddr23
+                   pmpaddr24 pmpaddr25 pmpaddr26 pmpaddr27 pmpaddr28 pmpaddr29 pmpaddr30 pmpaddr31
+                   pmpaddr32 pmpaddr33 pmpaddr34 pmpaddr35 pmpaddr36 pmpaddr37 pmpaddr38 pmpaddr39
+                   pmpaddr40 pmpaddr41 pmpaddr42 pmpaddr43 pmpaddr44 pmpaddr45 pmpaddr46 pmpaddr47
+                   pmpaddr48 pmpaddr49 pmpaddr50 pmpaddr51 pmpaddr52 pmpaddr53 pmpaddr54 pmpaddr55
+                   pmpaddr56 pmpaddr57 pmpaddr58 pmpaddr59 pmpaddr60 pmpaddr61 pmpaddr62 pmpaddr63
                    csr3f0 csr3f1 csr3f2 csr3f3 csr3f4 csr3f5 csr3f6 csr3f7
                    csr3f8 csr3f9 csr3fa csr3fb csr3fc csr3fd csr3fe csr3ff ];
 attach variables [ csr_4 ]
@@ -1004,7 +1004,7 @@ attach variables [ csr_58 ]
                     csr590 csr591 csr592 csr593 csr594 csr595 csr596 csr597
                     csr598 csr599 csr59a csr59b csr59c csr59d csr59e csr59f
                     csr5a0 csr5a1 csr5a2 csr5a3 csr5a4 csr5a5 csr5a6 csr5a7
-                    csr5a8 csr5a9 csr5aa csr5ab csr5ac csr5ad csr5ae csr5af
+                    scontext csr5a9 csr5aa csr5ab csr5ac csr5ad csr5ae csr5af
                     csr5b0 csr5b1 csr5b2 csr5b3 csr5b4 csr5b5 csr5b6 csr5b7
                     csr5b8 csr5b9 csr5ba csr5bb csr5bc csr5bd csr5be csr5bf ];
 attach variables [ csr_5C ]
@@ -1017,16 +1017,16 @@ attach variables [ csr_5C ]
                    csr5f0 csr5f1 csr5f2 csr5f3 csr5f4 csr5f5 csr5f6 csr5f7
                    csr5f8 csr5f9 csr5fa csr5fb csr5fc csr5fd csr5fe csr5ff ];
 attach variables [ csr_60 ]
-                 [ hstatus csr601 hedeleg hideleg csr604 csr605 hcounteren csr607
+                 [ hstatus csr601 hedeleg hideleg hie htimedelta hcounteren hgeie
                    csr608 csr609 csr60a csr60b csr60c csr60d csr60e csr60f
-                   csr610 csr611 csr612 csr613 csr614 csr615 csr616 csr617
+                   csr610 csr611 csr612 csr613 csr614 htimedeltah csr616 csr617
                    csr618 csr619 csr61a csr61b csr61c csr61d csr61e csr61f
                    csr620 csr621 csr622 csr623 csr624 csr625 csr626 csr627
                    csr628 csr629 csr62a csr62b csr62c csr62d csr62e csr62f
                    csr630 csr631 csr632 csr633 csr634 csr635 csr636 csr637
                    csr638 csr639 csr63a csr63b csr63c csr63d csr63e csr63f
-                   csr640 csr641 csr642 csr643 csr644 csr645 csr646 csr647
-                   csr648 csr649 csr64a csr64b csr64c csr64d csr64e csr64f
+                   csr640 csr641 csr642 htval  hip    hvip   csr646 csr647
+                   csr648 csr649 htinst csr64b csr64c csr64d csr64e csr64f
                    csr650 csr651 csr652 csr653 csr654 csr655 csr656 csr657
                    csr658 csr659 csr65a csr65b csr65c csr65d csr65e csr65f
                    csr660 csr661 csr662 csr663 csr664 csr665 csr666 csr667
@@ -1039,7 +1039,7 @@ attach variables [ csr_68 ]
                    csr690 csr691 csr692 csr693 csr694 csr695 csr696 csr697
                    csr698 csr699 csr69a csr69b csr69c csr69d csr69e csr69f
                    csr6a0 csr6a1 csr6a2 csr6a3 csr6a4 csr6a5 csr6a6 csr6a7
-                   csr6a8 csr6a9 csr6aa csr6ab csr6ac csr6ad csr6ae csr6af
+                   hcontext csr6a9 csr6aa csr6ab csr6ac csr6ad csr6ae csr6af
                    csr6b0 csr6b1 csr6b2 csr6b3 csr6b4 csr6b5 csr6b6 csr6b7
                    csr6b8 csr6b9 csr6ba csr6bb csr6bc csr6bd csr6be csr6bf ];
 attach variables [ csr_6C ]
@@ -1075,7 +1075,7 @@ attach variables [ csr_78 ]
                    csr798 csr799 csr79a csr79b csr79c csr79d csr79e csr79f ];
 attach variables [ csr_7A ]
                  [ tselect tdata1 tdata2 tdata3 csr7a4 csr7a5 csr7a6 csr7a7
-                   csr7a8 csr7a9 csr7aa csr7ab csr7ac csr7ad csr7ae csr7af ];
+                   mcontext csr7a9 csr7aa csr7ab csr7ac csr7ad csr7ae csr7af ];
 attach variables [ csr_7B ]
                  [ dcsr dpc dscratch0 dscratch1 csr7b4 csr7b5 csr7b6 csr7b7
                    csr7b8 csr7b9 csr7ba csr7bb csr7bc csr7bd csr7be csr7bf ];
@@ -1196,10 +1196,10 @@ attach variables [ csr_B0 ]
                    mhpmcounter8 mhpmcounter9 mhpmcounter10 mhpmcounter11 mhpmcounter12 mhpmcounter13 mhpmcounter14 mhpmcounter15
                    mhpmcounter16 mhpmcounter17 mhpmcounter18 mhpmcounter19 mhpmcounter20 mhpmcounter21 mhpmcounter22 mhpmcounter23
                    mhpmcounter24 mhpmcounter25 mhpmcounter26 mhpmcounter27 mhpmcounter28 mhpmcounter29 mhpmcounter30 mhpmcounter31
-                   mcountinhibit csrb21 csrb22 mhpmevent3 mhpmevent4 mhpmevent5 mhpmevent6 mhpmevent7
-                   mhpmevent8 mhpmevent9 mhpmevent10 mhpmevent11 mhpmevent12 mhpmevent13 mhpmevent14 mhpmevent15
-                   mhpmevent16 mhpmevent17 mhpmevent18 mhpmevent19 mhpmevent20 mhpmevent21 mhpmevent22 mhpmevent23
-                   mhpmevent24 mhpmevent25 mhpmevent26 mhpmevent27 mhpmevent28 mhpmevent29 mhpmevent30 mhpmevent31
+                   csrb20 csrb21 csrb22 csrb23 csrb24 csrb25 csrb26 csrb27
+		   csrb28 csrb29 csrb2a csrb2b csrb2c csrb2d csrb2e csrb2f
+		   csrb30 csrb31 csrb32 csrb33 csrb34 csrb35 csrb36 csrb37
+		   csrb38 csrb39 csrb3a csrb3b csrb3c csrb3d csrb3e csrb3f
                    csrb40 csrb41 csrb42 csrb43 csrb44 csrb45 csrb46 csrb47
                    csrb48 csrb49 csrb4a csrb4b csrb4c csrb4d csrb4e csrb4f
                    csrb50 csrb51 csrb52 csrb53 csrb54 csrb55 csrb56 csrb57
@@ -1299,7 +1299,7 @@ attach variables [ csr_DC ]
 attach variables [ csr_E0 ]
                  [ csre00 csre01 csre02 csre03 csre04 csre05 csre06 csre07
                    csre08 csre09 csre0a csre0b csre0c csre0d csre0e csre0f
-                   csre10 csre11 csre12 csre13 csre14 csre15 csre16 csre17
+                   csre10 csre11 hgeip csre13 csre14 csre15 csre16 csre17
                    csre18 csre19 csre1a csre1b csre1c csre1d csre1e csre1f
                    csre20 csre21 csre22 csre23 csre24 csre25 csre26 csre27
                    csre28 csre29 csre2a csre2b csre2c csre2d csre2e csre2f
