@@ -12,7 +12,12 @@
 @define QXLEN 16
 
 
+define pcodeop unimp;
 define pcodeop trap;
+define pcodeop ebreak;
+define pcodeop ecall;
+define pcodeop fence;
+define pcodeop fence.i;
 
 
 # possible tokens:  r0711 r1519 r2024 r2731 cr0206 cr0711 cd0711
@@ -117,18 +122,18 @@ macro zassignW(dest, src) {
 }
 
 macro zassignD(dest, src) {
-@if ADDRSIZE == "64"
-	dest = src;
-@elif ADDRSIZE == "128"
+@if ADDRSIZE == "128"
 	dest = zext(src);
+@else
+	dest = src;
 @endif
 }
 
 macro assignD(dest, src) {
-@if ADDRSIZE == "64"
-	dest = src;
-@elif ADDRSIZE == "128"
+@if ADDRSIZE == "128"
 	dest = sext(src);
+@else
+	dest = src;
 @endif
 }
 
@@ -146,11 +151,12 @@ immU: op1231 is op1231 & sop1231 { local tmp:$(XLEN) = sop1231 << 12; export tmp
 # used for goto
 immUJ: reloc is op1219 & op2020 & op2130 & sop3131 [ reloc = inst_start + ((sop3131 << 20) | (op2130 << 1) | (op2020 << 11) | (op1219 << 12)); ] { export *[ram]:$(XLEN) reloc; }
 
-@if ADDRSIZE == "64"
+@if ADDRSIZE == "32"
+shamt6: op2024 is op2024 & op2525=0 { local tmp:$(XLEN) = op2024; export tmp; }
+@else
 shamt5: op2024 is op2024 { local tmp:$(XLEN) = op2024; export tmp; }
-@endif
-
 shamt6: imm is op2024 & op2525 [ imm = (op2525 << 5) | op2024; ] { local tmp:$(XLEN) = imm; export tmp; }
+@endif
 
 FRM: "rne" is op1214=0 { local tmp:1 = 0; export tmp; }
 FRM: "rtz" is op1214=1 { local tmp:1 = 1; export tmp; }

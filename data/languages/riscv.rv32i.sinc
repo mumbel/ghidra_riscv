@@ -99,27 +99,29 @@
 	if (rs1 != rs2) goto immSB;
 }
 
-
 # ebreak  00100073 ffffffff SIMPLE (0, 0) 
 :ebreak  is op0001=0x3 & op0204=0x4 & op0506=0x3 & funct3=0x0 & op0711=0x0 & op1531=0x20
 {
+	ebreak();
 }
-
 
 # ecall  00000073 ffffffff SIMPLE (0, 0) 
 :ecall  is op0001=0x3 & op0204=0x4 & op0506=0x3 & funct3=0x0 & op0711=0x0 & op1531=0x0
 {
+	ecall();
 }
 
 
 # fence P,Q 0000000f f00fffff SIMPLE (0, 0) 
 :fence pred,succ is pred & succ & op0001=0x3 & op0204=0x3 & op0506=0x0 & funct3=0x0 & fm=0x0 & op0711=0x0 & op1519=0x0
 {
+	fence();
 }
 
 # jal d,a 0000006f 0000007f JSR (0, 0) 
 :jal rd,immUJ is immUJ & rd & op0711!=0 & op0001=0x3 & op0204=0x3 & op0506=0x3
 {
+	#TODO  RAS: push inst_next if rd=x1/x5
 	rd = inst_next;
 	call immUJ;
 }
@@ -134,6 +136,7 @@
 # jalr d,s,j 00000067 0000707f JSR (0, 0)
 :jalr rd,rs1,immI is rs1 & immI & rd & op0001=0x3 & op0204=0x1 & op0506=0x3 & funct3=0x0 & op0711!=0
 {
+	#TODO  RAS: push inst_next/pop based on rd=x1/x5 or rs1=x1/x5
 	local ea:$(XLEN) = (rs1 + immI) & ~1;
 	rd = inst_next;
 	call [ea];
@@ -335,6 +338,7 @@
 # unimp  c0001073 ffffffff SIMPLE (0, 0) 
 :unimp  is op0001=0x3 & op0204=0x4 & op0506=0x3 & funct3=0x1 & op0711=0x0 & op1531=0x18000
 {
+	unimp();
 }
 
 

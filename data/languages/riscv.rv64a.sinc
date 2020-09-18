@@ -123,9 +123,7 @@
 	local tmprs2 = rs2L;
 	local tmprs1 = rs1;
 	rdL = 1;
-	if (RESERVE == 0) goto inst_next;
-	if (RESERVE_ADDRESS != rs1) goto inst_next;
-	if (RESERVE_LENGTH != 8) goto inst_next;
+	if ((RESERVE == 0)||(RESERVE_ADDRESS != tmprs1)||(RESERVE_LENGTH != 8)) goto inst_next;
 	*[ram]:8 tmprs1 = tmprs2;
 	rdL = 0;
 	RESERVE_ADDRESS = 0;

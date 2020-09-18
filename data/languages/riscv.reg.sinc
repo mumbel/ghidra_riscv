@@ -33,7 +33,7 @@ define register offset=0x1018 size=1 [ RESERVE ];
 define register offset=0x101C size=1 [ RESERVE_LENGTH ];
 #TODO  FIXME
 
-
+#ATTN  RV32E is the same instruction-set encoding, but only defines x0-x15
 # x0  x1  x2  x3  x4  x5  x6  x7  x8  x9  x10 x11 x12 x13 x14 x15
 # z   ra  sp  gp  tp  t0  t1  t2  s0  s1  a0  a1  a2  a3  a4  a5
 # x16 x17 x18 x19 x20 x21 x22 x23 x24 x25 x26 x27 x28 x29 x30 x31

@@ -75,6 +75,7 @@
 # c.ebreak  00009002 0000ffff SIMPLE (0, 0) 
 :c.ebreak  is cop0001=0x2 & cop1315=0x4 & cop0212=0x400
 {
+	ebreak();
 }
 
 @if ADDRSIZE == "32" || ADDRSIZE == "64"
