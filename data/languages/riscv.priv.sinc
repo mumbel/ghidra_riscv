@@ -78,4 +78,73 @@ define pcodeop sfence.vma;
 
 
 # Hypervisor Memory-Management
-#TODO
+#TODO  move to rv32h and rv64h?
+
+:hlv.b rd,rs1 is op0006=0x73 & funct3=0x4 & funct7=0x30 & rs1 & rd & op2024=0x0
+{
+	rd = sext(*[ram]:1 rs1);
+}
+
+:hlv.bu rd,rs1 is op0006=0x73 & funct3=0x4 & funct7=0x30 & rs1 & rd & op2024=0x1
+{
+	rd = zext(*[ram]:1 rs1);
+}
+
+:hlv.h rd,rs1 is op0006=0x73 & funct3=0x4 & funct7=0x32 & rs1 & rd & op2024=0x0
+{
+	rd = sext(*[ram]:2 rs1);
+}
+
+:hlv.hu rd,rs1, is op0006=0x73 & funct3=0x4 & funct7=0x32 & rs1 & rd & op2024=0x1
+{
+	rd = zext(*[ram]:2 rs1);
+}
+
+:hlvx.hu rd,rs1 is op0006=0x73 & funct3=0x4 & funct7=0x32 & rs1 & rd & op2024=0x3
+{
+	rd = zext(*[ram]:2 rs1);
+}
+
+:hlv.w rd,rs1 is op0006=0x73 & funct3=0x4 & funct7=0x34 & rs1 & rd & op2024=0x0
+{
+	assignW(rd, *[ram]:4 rs1);
+}
+
+:hlvx.wu rd,rs1 is op0006=0x73 & funct3=0x4 & funct7=0x34 & rs1 & rd & op2024=0x3
+{
+	zassignW(rd, *[ram]:4 rs1);
+}
+
+:hsv.b rs1,rs2 is op0006=0x73 & funct3=0x4 & funct7=0x31 & op0711=0x0 & rs1 & rs2
+{
+	*[ram]:1 rs1 = rs2:1;
+}
+
+:hsv.h rs1,rs2 is op0006=0x73 & funct3=0x4 & funct7=0x33 & op0711=0x0 & rs1 & rs2
+{
+	*[ram]:2 rs1 = rs2:2;
+}
+
+:hsv.w rs1,rs2 is op0006=0x73 & funct3=0x4 & funct7=0x35 & op0711=0x0 & rs1 & rs2
+{
+	*[ram]:4 rs1 = rs2:4;
+}
+
+@if ADDRSIZE == "64"
+
+:hlv.wu rd,rs1 is op0006=0x73 & funct3=0x4 & funct7=0x34 & rs1 & rd & op2024=0x1
+{
+	rd = zext(*[ram]:4 rs1);
+}
+
+:hlv.d rd,rs1 is op0006=0x73 & funct3=0x4 & funct7=0x36 & rs1 & rd & op2024=0x0
+{
+	rd = *[ram]:8 rs1;
+}
+
+:hsv.d rs1,rs2 is op0006=0x73 & funct3=0x4 & funct7=0x37 & op0711=0x0 & rs1 & rs2
+{
+	*[ram]:8 rs1 = rs2;
+}
+
+@endif
