@@ -244,7 +244,7 @@
 # sll d,s,t 00001033 fe00707f SIMPLE (0, 0) 
 :sll rd,rs1,rs2 is rs1 & rs2 & rd & op0001=0x3 & op0204=0x4 & op0506=0x1 & funct3=0x1 & funct7=0x0
 {
-	local shift:$(XLEN) = rs2 & 0x3f;
+	local shift:$(XLEN) = rs2 & ($(ADDRSIZE) - 1);
 	rd = rs1 << shift;
 }
 
@@ -287,7 +287,7 @@
 # sra d,s,t 40005033 fe00707f SIMPLE (0, 0) 
 :sra rd,rs1,rs2 is rs1 & rs2 & rd & op0001=0x3 & op0204=0x4 & op0506=0x1 & funct3=0x5 & funct7=0x20
 {
-	local shift:$(XLEN) = rs2 & 0x3f;
+	local shift:$(XLEN) = rs2 & ($(ADDRSIZE) - 1);
 	rd = rs1 s>> shift;
 }
 
@@ -302,7 +302,7 @@
 # srl d,s,t 00005033 fe00707f SIMPLE (0, 0) 
 :srl rd,rs1,rs2 is rs1 & rs2 & rd & op0001=0x3 & op0204=0x4 & op0506=0x1 & funct3=0x5 & funct7=0x0
 {
-	local shift:$(XLEN) = rs2 & 0x3f;
+	local shift:$(XLEN) = rs2 & ($(ADDRSIZE) - 1);
 	rd = rs1 >> shift;
 }
 
