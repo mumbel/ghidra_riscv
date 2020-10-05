@@ -1,7 +1,6 @@
 <patternlist>
-  <patternpairs totalbits="32" postbits="16">
+  <patternpairs totalbits="32" postbits="0">
     <prepatterns>
-      <!--  ATTN  these patterns are above the insructions in sinc -->
       <!--  76543210 54321098 32109876 10987654 -->
       <data>10000010 10000000</data> <!-- ret -->
       <data>......01 101.....</data> <!-- c.j imm -->
@@ -13,9 +12,8 @@
       <funcstart/>
     </postpatterns>
   </patternpairs>
-    <patternpairs totalbits="48" postbits="32">
+    <patternpairs totalbits="48" postbits="0">
     <prepatterns>
-      <!--  ATTN  these patterns are above the insructions in sinc -->
       <!--  76543210 54321098 32109876 10987654 -->
       <data>10000010 10000000</data> <!-- ret -->
       <data>......01 101.....</data> <!-- c.j imm -->
@@ -27,9 +25,8 @@
       <funcstart/>
     </postpatterns>
   </patternpairs>
-  <patternpairs totalbits="48" postbits="16">
+  <patternpairs totalbits="48" postbits="0">
     <prepatterns>
-      <!--  ATTN  these patterns are above the insructions in sinc -->
       <!--  76543210 54321098 32109876 10987654 -->
       <data>01101111 ....0000 ........ ........</data> <!-- j imm -->
     </prepatterns>
@@ -40,9 +37,8 @@
       <funcstart/>
     </postpatterns>
   </patternpairs>
-    <patternpairs totalbits="64" postbits="32">
+    <patternpairs totalbits="64" postbits="0">
     <prepatterns>
-      <!--  ATTN  these patterns are above the insructions in sinc -->
       <!--  76543210 54321098 32109876 10987654 -->
       <data>01101111 ....0000 ........ ........</data> <!-- j imm -->
     </prepatterns>

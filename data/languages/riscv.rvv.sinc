@@ -1,3 +1,44 @@
+# Vector
+
+# sew: "e8"    is vsew=0 {}
+# sew: "e16"   is vsew=1 {}
+# sew: "e32"   is vsew=2 {}
+# sew: "e64"   is vsew=3 {}
+# sew: "e128"  is vsew=4 {}
+# sew: "e256"  is vsew=5 {}
+# sew: "e512"  is vsew=6 {}
+# sew: "e1024" is vsew=7 {}
+
+# vmul: "m1"   is vlmul=0 {}
+# vmul: "m2"   is vlmul=1 {}
+# vmul: "m4"   is vlmul=2 {}
+# vmul: "m8"   is vlmul=3 {}
+# vmul: "mf8"  is vlmul=5 {}
+# vmul: "mf4"  is vlmul=6 {}
+# vmul: "mf2"  is vlmul=7 {}
+
+# vmask: "mu"  is vma=0 {}
+# vmask: "ma"  is vma=1 {}
+# vtail: "tu"  is vta=0 {}
+# vtail: "ta"  is vta=1 {}
+
+#TODO  possible tables
+# mop=0  unit-stride        VLE<EEW>
+# mop=2  strided            VLSE<EEW>
+# mop=3  indexed            VLXEI<EEW>
+# mop=0  unit-stride        VSE<EEW>
+# mop=1  indexed-unordered  VSUXEI<EEW>
+# mop=2  strided            VSSE<EEW>
+# mop=3  indexed-ordered    VSXEI<EEW>
+# lumop=0  unit-stride
+# lumop=8  unit-stride,whole registers
+# lumop=16 unit-stride fault-only-first
+# sumop=0  unit-stride
+# sumop=8  unit-stride,whole registers
+# sumop=16 unit-stride fault-only-first
+# nfields imm is nf [ imm = nf + 1; ] { export *[const]:1 imm; }
+
+
 # vaadd.vv       31..26=0x09 vm vs2 vs1 14..12=0x2 vd 6..0=0x57
 # vaadd.vv vd, vs2, vs1, vm   # roundoff_signed(vs2[i] + vs1[i], 1)
 :vaadd.vv  vd, vs2, vs1, vm    is op2631=0x9 & vm & vs2 & vs1 & op1214=0x2 & vd & op0006=0x57  unimpl
